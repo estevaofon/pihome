@@ -5,8 +5,8 @@ import json
 import time
 import logging
 
-logging.basicConfig(filename='client.log', level=logging.WARNING,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='client.log',level=logging.WARNING,
+        format='%(asctime)s - %(levelname)s - %(message)s')
 
 GPIO.setmode(GPIO.BCM)
 pins = {
@@ -17,7 +17,6 @@ pins = {
 for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
-
 
 def loop():
     while 1:
@@ -34,12 +33,12 @@ def loop():
                 pass
             if state == '1' and GPIO.input(int(pin)) == 1:
                 pass
-            if state == '0' and GPIO.input(int(pin)) == 1:
+            if state == '1' and GPIO.input(int(pin)) == 1:
                 GPIO.output(int(pin), GPIO.LOW)
-                print("Apagou")
-            if state == '1' and GPIO.input(int(pin)) == 0:
-                GPIO.output(int(pin), GPIO.HIGH)
                 print("Acendeu")
+            if state == '0' and GPIO.input(int(pin)) == 0:
+                GPIO.output(int(pin), GPIO.HIGH)
+                print("Apagou")
         time.sleep(2)
 try:
     loop()
